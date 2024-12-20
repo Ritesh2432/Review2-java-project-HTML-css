@@ -1,0 +1,67 @@
+// Validate Registration Form
+function validateRegistrationForm() {
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+  if (!username || !email || !password || !confirmPassword) {
+    alert("All fields are required.");
+    return false;
+  }
+
+  if (!validateEmail(email)) {
+    alert("Invalid email format.");
+    return false;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return false;
+  }
+
+  alert("Registration successful!");
+  return true;
+}
+
+// Email Validation Function
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Handle Login
+function login() {
+  const username = document.getElementById("loginUsername").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
+
+  if (!username || !password) {
+    alert("Please enter your username and password.");
+    return false;
+  }
+
+  alert(`Welcome, ${username}! You have successfully logged in.`);
+  return true;
+}
+
+// Toggle Password Visibility
+function togglePasswordVisibility() {
+  const passwordField = document.getElementById("password");
+  const confirmPasswordField = document.getElementById("confirmPassword");
+
+  const passwordType =
+    passwordField.type === "password" ? "text" : "password";
+  passwordField.type = passwordType;
+  confirmPasswordField.type = passwordType;
+
+  document.getElementById("togglePassword").innerText =
+    passwordType === "password" ? "Show Password" : "Hide Password";
+}
+
+// Add Event Listener
+document.addEventListener("DOMContentLoaded", () => {
+  const togglePasswordButton = document.getElementById("togglePassword");
+  if (togglePasswordButton) {
+    togglePasswordButton.addEventListener("click", togglePasswordVisibility);
+  }
+});
